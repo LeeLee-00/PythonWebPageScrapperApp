@@ -12,7 +12,7 @@ Before running the scraper, you need to have Python installed on your system alo
 
 ### Prerequisites
 
-- Python 3.x
+- Python 3
 - Selenium
 - Microsoft Edge browser
 - Corresponding version of `msedgedriver.exe`
