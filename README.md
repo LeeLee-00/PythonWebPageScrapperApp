@@ -12,7 +12,7 @@ To run the scraper, ensure Python is installed on your system along with the req
 
 ### Prerequisites
 
-- Python 3.x
+- Python 3
 - Selenium
 - Microsoft Edge browser
 - [`webdriver-manager`](https://pypi.org/project/webdriver-manager/) for handling the Edge WebDriver
