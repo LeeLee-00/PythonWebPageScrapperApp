@@ -1,21 +1,21 @@
 # PythonWebPageScraperApp
 
-This is a starter Python-based web scraping application that uses Selenium to scrape content from the Python official website. It's designed to run in headless mode for easy deployment and automation.
+This Python-based web scraping application uses Selenium with Microsoft Edge WebDriver to scrape content from the official Python website. It runs in headless mode for efficiency and ease of use in various environments, including cloud platforms.
 
 ## Description
 
-The app navigates to the "About" and main page of `python.org` and extracts all headings and paragraphs, saving them to text files. This can be useful for a variety of purposes, such as content aggregation, analysis, or offline reading.
+The app navigates to the "About" and main page of [`python.org`](https://www.python.org/) and extracts all headings and paragraphs, saving them to text files. This can be useful for a variety of purposes, such as content aggregation, analysis, or offline reading.
 
 ## Setup
 
-Before running the scraper, you need to have Python installed on your system along with the required packages listed in `requirements.txt`. You also need to download the appropriate Microsoft Edge WebDriver (`msedgedriver.exe`) for your version of Microsoft Edge.
+To run the scraper, ensure Python is installed on your system along with the required packages. The application uses the Edge WebDriver, managed automatically through `webdriver-manager`, simplifying the setup process.
 
 ### Prerequisites
 
 - Python 3.x
 - Selenium
 - Microsoft Edge browser
-- Corresponding version of `msedgedriver.exe`
+- [`webdriver-manager`](https://pypi.org/project/webdriver-manager/) for handling the Edge WebDriver
 
 ### Installation
 
@@ -25,35 +25,19 @@ Before running the scraper, you need to have Python installed on your system alo
 pip install -r requirements.txt
 ```
 
-Download msedgedriver.exe from the [Microsoft Edge Developer website](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/) and place it in the same directory as your script.
-
-If you're on a Unix-based system or using a cloud environment, make sure that the WebDriver file has the correct execution permissions set:
-
-```bash
-chmod +x msedgedriver
-```
-
 ## Usage
 To run the scraper:
 
 ```bash
 python main.py
 ```
-this will execute the script and create two text files: scraped_about_page.txt and scraped_home_page.txt, containing the scraped content from the respective pages.
+this will execute the script and create 3 text files: scraped_about_page.txt and scraped_home_page.txt, and scraped_conduct_page.txt, containing the scraped content from the respective pages.
 
-Here are some steps to troubleshoot and resolve this issue:
+Please ignore error:
+```
+[24364:16552:1218/192301.989:ERROR:policy_logger.cc(156)] :components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc(161) Cloud management controller initialization aborted as CBCM is not enabled. Please use the --enable-chrome-browser-cloud-management` command line flag to enable it if you are not using the official Google Chrome build.
 
-# Correct Path:
-Verify that msedgedriver.exe is indeed in the directory where you are running the script from, which should be in the current working directory (cwd).
+DevTools listening on ws://127.0.0.1:3768/devtools/browser/3cbbd6b3-b6d1-4ca3-889d-1d60c70e1b28
+```
 
-# Permissions:
-Ensure that msedgedriver.exe has the correct permissions set. Since I was on Windows, this typically isn't an issue like it would be on Unix-based systems, but it's still something to consider.
-
-# Version Match:
-Ensure that the version of msedgedriver.exe matches the version of Microsoft Edge installed on your system. You can download the appropriate version of the Edge WebDriver from the [Microsoft Edge Developer website](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/).
-
-# Correct Driver:
-Confirm that you are using the correct driver for Edge and not accidentally using the one for Chrome or another browser.
-
-# Environment Variables:
-You can also try adding the directory containing msedgedriver.exe to your system's PATH environment variable, which can help WebDriver to locate the executable if necessary!.
+as they are more warnings than critical errors and are related to enterprise policy management features which are likely not relevant to the use case of this project sample.
