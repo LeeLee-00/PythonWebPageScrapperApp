@@ -1,3 +1,6 @@
+import asyncio
+import aiohttp
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.edge.service import Service as EdgeService
@@ -18,7 +21,7 @@ cwd = os.getcwd()
 # Setup WebDriver
 driver = webdriver.Edge(service=EdgeService(EdgeDriver().install()))
 
-def scrape_page(driver, url, file_name):
+def scrape_page_selenium(driver, url, file_name):
     """
     Navigates to a page using the provided WebDriver, scrapes headings and paragraphs, 
     and saves them to the specified file.
@@ -39,11 +42,26 @@ def scrape_page(driver, url, file_name):
         for container in containers:
             file.write(container.text + '\n\n')
 
+async def fetch_page(session, url):
+    """
+    Fetches the page content using aiohttp and returns the response.
+    
+    :param session: aiohttp ClientSession instance
+    :param url: URL of the page to fetch
+    :return: Response from the page
+    """
+    try:
+        async with session.get(url) as response:
+            return await response.text()
+    except Exception as e:
+        print(f"Error fetching {url}: {e}")
+        return None
+
 # Example usage:
 # Make sure to initialize the driver before calling the function
-scrape_page(driver, "https://www.python.org/about/", "scraped_about_page.txt")
-scrape_page(driver, "https://www.python.org/", "scraped_home_page.txt")
-scrape_page(driver,"https://www.python.org/psf/conduct/", "scraped_conduct_page.txt")
+scrape_page_selenium(driver, "https://www.python.org/about/", "scraped_about_page.txt")
+scrape_page_selenium(driver, "https://www.python.org/", "scraped_home_page.txt")
+scrape_page_selenium(driver,"https://www.python.org/psf/conduct/", "scraped_conduct_page.txt")
 
 # add your timeout
 driver.quit()
