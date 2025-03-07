@@ -49,24 +49,6 @@ log = logging.getLogger()
 log.setLevel(LOG_LEVEL)
 
 
-# Adds an indicator for the end of the log for Fluentd regex
-class SingleLineFormat(logging.Formatter):
-    """
-    Custom formatter that replaces newlines with '|' for better compatibility with some logging systems.
-
-    Attributes:
-        None
-
-    Methods:
-        format(record): Format the log message.
-    """
-
-    def format(self, record):
-        s = super().format(record)
-        s = s.replace("\n", "|")
-        return s
-
-
 # Check if the logger has handlers to avoid adding duplicates
 if not log.handlers:
 
@@ -75,10 +57,6 @@ if not log.handlers:
         "[%(asctime)s.%(msecs)03d] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s",
         "%Y-%m-%dT%H:%M:%S",
     )
-    # streamFormatter = SingleLineFormat(
-    #     "[%(asctime)s.%(msecs)03d] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s",
-    #     "%Y-%m-%dT%H:%M:%S",
-    # )
 
     # Create handler for log file
     file_handler = RotatingFileHandler(logger_file, maxBytes=max_bytes, backupCount=10)
